@@ -30,6 +30,8 @@
     <link href="css/aos.css?ver=1.1.0" rel="stylesheet">
     <link href="css/ekko-lightbox.css?ver=1.1.0" rel="stylesheet">
     <link href="css/main.css?ver=1.1.0" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet">
+  <style media="screen">
     <noscript>
         <style type="text/css">
             [data-aos] {
@@ -57,7 +59,7 @@
         .month {
             padding: 70px 25px;
             width: 100%;
-            background: #CC0000;
+            background: url("images/br.jpeg") no-repeat center center;
         }
 
         .month ul {
@@ -146,6 +148,37 @@
                 font-size: calc(3.375rem * var(--smaller));
             }
         }
+
+
+        #timer {
+            font-size: 3em;
+            font-weight: 100;
+            color: white;
+            width: auto;
+            color: white;
+            text-align: center;
+            
+            flex-direction: column;
+
+        }
+
+        #timer div {
+            /* display: inline-block; */
+            min-width: auto;
+            padding: auto;
+            border-radius: 10px;
+            /* border: 2px solid wheat; */
+            margin: 6px;
+            box-shadow: 1px 1px 15px rgb(0 0 0 / 25%);
+        }
+
+        #timer div span {
+            color: #ffffff;
+            display: block;
+            font-size: .35em;
+            justify-content: center
+        }
+
     </style>
 
 </head>
@@ -167,17 +200,15 @@
                 </div>
             </div>
 
+            {{-- <div id="timer"></div> --}}
+
+
             <div class="mt-3">
                 <div class="month">
                     <ul>
                         <li style="text-align:center"> Ngày 15 tháng 03</li>
                         <div class="mt-3">
-                            <div id="countdown">
-                                <ul>
-                                    <li><span id="days"></span> Ngày <span id="hours"></span> Giờ <span id="minutes"></span> Phút </li>
-                                    <li style="text-align:center"><span id="seconds"></span> Giây</li>
-                                </ul>
-                            </div>
+                            <div id="timer"></div>
                         </div>
                     </ul>
                 </div>
@@ -227,12 +258,22 @@
                 </ul>
             </div>
 
-            <div class="ww-section ww-rsvp-detaill text-white" id="rsvp">
+            <div class="ww-sectionn ww-rsvp-detaill text-white" id="rsvp">
                 <div class="container" data-aos="zoom-in-up" data-aos-duration="1000">
                     <div class="col text-center">
-                        <h2 class="h1 ww-title pb-3" data-aos="zoom-in-down" data-aos-duration="1000">Sổ Lưu Bút
-                        </h2>
-                        <div>Wedding Invitation</div>
+                        <div style="font-family: 'Times New Roman', Times, serif; font-size: 30px;">Wedding Invitation</div>
+                        <div style="font-family: 'Times New Roman', Times, serif; font-size: 20px;">Save the Date</div>
+
+                        <h3 class="mt-5" style="font-family: Great Vibes, cursive;font-size: 33px;">Tấn Thành & Thị Trang</h3>
+                        <div class="mt-4" style="font-family: 'Times New Roman', Times, serif;font-size: 17px;">Trân trọng kính mời người thương</div>
+                        <div style="font-family: 'Times New Roman', Times, serif;font-size: 17px;">Đến dự buổi tiệc rượu chung vui cùng vợ chồng chúng tôi</div>
+
+                        <h4 class="mt-5" style="font-family: 'Times New Roman', Times, serif">Tại: TDP3, Phường Phổ Minh, TXDP, Tỉnh Quảng Ngãi</h4>
+
+                        <h4 style="font-family: 'Times New Roman', Times, serif">Vào lúc: 10:00 AM</h4>
+                        <h4 style="font-family: 'Times New Roman', Times, serif;font-size: 23px;">Thứ 4, ngày 15 tháng 03 năm 2023</h4>
+
+                        <div class="mt-5" style="font-family: 'Times New Roman', Times, serif;font-size: 20px;">Sự diện diện của bạn là niềm vinh hạnh cho gia đình chúng tôi</div>
                     </div>
                 </div>
             </div>
@@ -565,50 +606,29 @@
     <script src="scripts/main.js?ver=1.1.0"></script>
 
     <script>
-        (function () {
-            const second = 1000,
-                minute = second * 60,
-                hour = minute * 60,
-                day = hour * 24;
+        function updateTimer() {
+          future = Date.parse("mar 16, 2023 01:30:00");
+          now = new Date();
+          diff = future - now;
 
-            //I'm adding this section so I don't have to keep updating this pen every year :-)
-            //remove this if you don't need it
-            let today = new Date(),
-                dd = String(today.getDate()).padStart(2, "0"),
-                mm = String(today.getMonth() + 1).padStart(2, "0"),
-                yyyy = today.getFullYear(),
-                nextYear = yyyy + 1,
-                dayMonth = "03/16/",
-                birthday = dayMonth + yyyy;
+          days = Math.floor(diff / (1000 * 60 * 60 * 24));
+          hours = Math.floor(diff / (1000 * 60 * 60));
+          mins = Math.floor(diff / (1000 * 60));
+          secs = Math.floor(diff / 1000);
 
-            today = mm + "/" + dd + "/" + yyyy;
-            if (today > birthday) {
-                birthday = dayMonth + nextYear;
-            }
-            //end
+          d = days;
+          h = hours - days * 24;
+          m = mins - hours * 60;
+          s = secs - mins * 60;
 
-            const countDown = new Date(birthday).getTime(),
-                x = setInterval(function () {
-
-                    const now = new Date().getTime(),
-                        distance = countDown - now;
-
-                    document.getElementById("days").innerText = Math.floor(distance / (day)),
-                        document.getElementById("hours").innerText = Math.floor((distance % (day)) / (hour)),
-                        document.getElementById("minutes").innerText = Math.floor((distance % (hour)) / (minute)),
-                        document.getElementById("seconds").innerText = Math.floor((distance % (minute)) / second);
-
-                    //do something later when date is reached
-                    if (distance < 0) {
-                        document.getElementById("headline").innerText = "It's my birthday!";
-                        document.getElementById("countdown").style.display = "none";
-                        document.getElementById("content").style.display = "block";
-                        clearInterval(x);
-                    }
-                    //seconds
-                }, 0)
-        }());
-
+          document.getElementById("timer")
+              .innerHTML =
+              '<div>' + d + '<span>Ngày</span></div>' +
+              '<div>' + h + '<span>Giờ</span></div>' +
+              '<div>' + m + '<span>Phút</span></div>' +
+              '<div>' + s + '<span>Giây</span></div>';
+      }
+      setInterval('updateTimer()', 1000);
     </script>
 </body>
 
